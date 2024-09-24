@@ -7,10 +7,11 @@ from tensorboardX import SummaryWriter
 import time
 
 from sub_code.models import CDDDModel
-from sub_code.NSGA2 import *
+from sub_code.fitness import *
 from sub_code.property import *
 from warnings import simplefilter
-from sub_code.archive import *
+from sub_code.generation_rule import *
+from sub_code.selection_rule import *
 from sub_code.mechanism import Fitness
 simplefilter(action="ignore", category=FutureWarning)
 import pygmo as pg
@@ -318,3 +319,4 @@ if __name__ == "__main__":
 
 
 # writer.close()
+
