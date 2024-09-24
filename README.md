@@ -23,29 +23,32 @@ The packages need to install:
   - pip:
     - molsets
     - cddd
-The installed environment can be downloaded from the cloud drive
--cmomo-env()
+- The installed environment can be downloaded from the cloud drive
+  -qmocddd()
 
 ### Data Description
-data/qedplogp_test: dataset on Task1.
-data/Guacamol_sample_800: dataset on Task2.
-data/docking_test: dataset on Task3.
-data/gsk3_test: dataset on Task4.
-data/archive/: the bank library for each lead molecule on four tasks.
+- data/qedplogp_test: dataset on Task1.
+- data/Guacamol_sample_800: dataset on Task2.
+- data/docking_test: dataset on Task3.
+- data/gsk3_test: dataset on Task4.
+- data/archive/: the bank library for each lead molecule on four tasks.
 
-sub_code/fitness.py: The script to calculate the objectives of optimization tasks.
-sub_code/property.py: The script to calculate the molecular properties.
-sub_code/generation_rule.py: The script to generate offspring molecules.
-sub_code/selection_rule.py: The script to compare and select molecules.
-sub_code/models.py: The encoder and decoder process.
-sub_code/calc_no.py: The script to calculate the docking scores.
-sub_code/mechanism.py: Guacamol tasks.
-sub_code/nonDominationSort.py: the non-dominated relationships between molecules.
+### File Description
+- sub_code/fitness.py: The script to calculate the objectives of optimization tasks.
+- sub_code/property.py: The script to calculate the molecular properties.
+- sub_code/generation_rule.py: The script to generate offspring molecules.
+- sub_code/selection_rule.py: The script to compare and select molecules.
+- sub_code/models.py: The encoder and decoder process.
+- sub_code/calc_no.py: The script to calculate the docking scores.
+- sub_code/mechanism.py: Guacamol tasks.
+- sub_code/nonDominationSort.py: the non-dominated relationships between molecules.
 
-CMOMO_task1.py: optimization Task1. 
-CMOMO_task2.py: optimization Task2. 
-CMOMO_task3.py: optimization Task3. 
-CMOMO_task4.py: optimization Task4. 
+- download_default_model.sh: download the pre-trained encoder-decoder.
+- environment.yml: install the environment.
+- CMOMO_task1.py: optimization Task1. 
+- CMOMO_task2.py: optimization Task2. 
+- CMOMO_task3.py: optimization Task3. 
+- CMOMO_task4.py: optimization Task4. 
 
 ### Getting Started
 For Task 1, please run python CMOMO_task1.py
