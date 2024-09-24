@@ -64,6 +64,8 @@ The output results, i.e., optimized molecules, are summarized in TSCMO_task1_end
 ### Writing your own Objective Function
 The fitness function can wrap any function that has following properties:
 - Takes a RDKit mol object as input and returns a number as score.
+- Uses pyTDC platform to gets the properties such as QED, logp, Drd2, JNK3,...
+- Uses docking platform such as qvina 2 to get the protein-ligand docking score.
 
 
 ## Citation
