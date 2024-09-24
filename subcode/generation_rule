@@ -1,0 +1,124 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun  6 14:07:42 2022
+
+@author: 86136
+"""
+from property import *
+from nonDominationSort import *
+
+import torch
+from tqdm import tqdm
+from numpy import dot
+from numpy.linalg import norm
+import calc_no as dock
+from rdkit.Chem import Descriptors
+
+
+""" 
+crossover
+"""
+
+def crossover(pops, pc,d, lb, rb):
+    # 拷贝父代种群，以防止改变父代种群结构  ,d=0.25参数
+    chrPops = pops
+    nPop = chrPops.shape[0]
+    for i in range(0, nPop): 
+        if np.random.rand() < pc: 
+            mother = chrPops[np.random.randint(nPop)]
+            alpha1=np.random.rand()#生成2个随机数#,[alpha1,alpha2]=np.random.rand(2)
+            r1=(-d)+(1+2*d)*alpha1
+            #r2=(-d)+(1+2*d)*alpha2
+            chrPops[i] = chrPops[i]+r1*(mother-chrPops[i])#混合线性交叉
+            chrPops[i][chrPops[i]<lb] = lb 
+            chrPops[i][chrPops[i]>rb] = rb 
+    return chrPops
+
+def crossover_2(pops, pc,d, lb, rb):
+    # 拷贝父代种群，以防止改变父代种群结构  ,d=0.25参数
+    nPop = pops.shape[0]
+    chrPops = np.zeros((nPop * 2, pops.shape[1]))
+    for i in range(0, nPop):
+        if np.random.rand() < pc:
+            mother1 = pops[np.random.randint(nPop)]
+            mother2 = pops[np.random.randint(nPop)]
+            [alpha1, alpha2] = np.random.rand(2)  # 生成2个随机数#,[alpha1,alpha2]=np.random.rand(2)
+            r1 = (-d) + (1 + 2 * d) * alpha1
+            r2 = (-d) + (1 + 2 * d) * alpha2
+            chrPops[2 * i] = pops[i]+r1*(mother1-pops[i])  # 混合线性交叉
+            chrPops[2 * i + 1] = pops[i]+r2*(mother2-pops[i])  # 混合线性交叉
+        chrPops[chrPops < lb] = lb
+        chrPops[chrPops > rb] = rb
+    return chrPops
+
+def crossover_z0(z_0, archive1_emb, pc,d, lb, rb):
+    # 拷贝父代种群，以防止改变父代种群结构  ,d=0.25参数
+    chrPops = archive1_emb
+    nPop = chrPops.shape[0]
+    for i in range(0, nPop):
+        if np.random.rand() < pc:
+            mother = z_0
+            alpha1=np.random.rand()#生成2个随机数#,[alpha1,alpha2]=np.random.rand(2)
+            r1=(-d)+(1+2*d)*alpha1
+            #r2=(-d)+(1+2*d)*alpha2
+            chrPops[i] = mother  + r1*(archive1_emb[i]-mother)#0.8*
+    chrPops[i][chrPops[i]<lb] = lb
+    chrPops[i][chrPops[i]>rb] = rb
+    return chrPops
+
+def crossover_z0_2(z_0, archive1_emb, pc,d, lb, rb):
+    # 拷贝父代种群，以防止改变父代种群结构  ,d=0.25参数
+    nPop = archive1_emb.shape[0]
+    chrPops = np.zeros((nPop*2, z_0.shape[1]))
+
+    for i in range(0, nPop):
+        if np.random.rand() < pc:
+            mother = z_0
+            [alpha1,alpha2]=np.random.rand(2)#生成2个随机数#,[alpha1,alpha2]=np.random.rand(2)
+            r1=(-d)+(1+2*d)*alpha1
+            r2=(-d)+(1+2*d)*alpha2
+            chrPops[2*i] = mother+0.8*r1*(archive1_emb[i]-mother)#混合线性交叉
+            chrPops[2*i+1] = mother + 0.8*r2* (archive1_emb[i]-mother)  # 混合线性交叉
+    chrPops[chrPops < lb] = lb
+    chrPops[chrPops > rb] = rb
+    return chrPops
+
+
+"""
+mutation
+"""
+
+#分组线性随机变异
+def group_mut(pops, lb, rb, pm,numberOfGroups):
+    nPop, nChr = pops.shape
+    outIndexarray = creategroup(nPop, nChr, numberOfGroups)
+    chosengroups = np.random.randint(1, numberOfGroups + 1, size=outIndexarray.shape[0])  # size=outIndexList.shape[0]
+    Site = np.zeros((nPop, nChr))
+    for i in range(len(chosengroups)):
+        Site[i, :] = (outIndexarray[i, :] == chosengroups[i]).astype(int)
+    # 生成随机数判断是否变异
+    mu = np.random.rand(nPop, 1)
+    mu = np.tile(mu, (1, nChr))
+    # 选中的组且小于变异概率，p*emb
+    temp = np.where((Site == 1) & (mu < pm), 1, 0)
+    pops[np.where(temp == 1)] = (np.random.rand(len(np.where(temp==1)[0]))-0.5)*2
+    pops = np.minimum(np.maximum(pops, lb), rb)
+    return pops
+
+#生成随机分组索引
+def creategroup(nPop,nChr,numberOfGroups):
+    outIndexarray = []
+    for i in range(nPop):
+        # 初始化索引列表
+        outIndexList = []
+        varsPerGroup = nChr // numberOfGroups
+        # 循环生成索引列表
+        for i in range(1, numberOfGroups):
+            outIndexList.extend(np.ones(varsPerGroup) * i)
+        # 补足长度以确保所有变量都被分组
+        outIndexList.extend(np.ones(nChr - len(outIndexList)) * numberOfGroups)
+        # 对索引列表进行随机排列
+        np.random.shuffle(outIndexList)
+        outIndexarray.append(outIndexList)
+    outIndexarray = np.array(outIndexarray)
+    return outIndexarray
