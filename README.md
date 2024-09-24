@@ -24,7 +24,7 @@ The packages need to install:
     - molsets
     - cddd
 - The installed environment can be downloaded from the cloud drive
-  -qmocddd()
+  - qmocddd()
 
 ### Data Description
 - data/qedplogp_test: dataset on Task1.
@@ -50,13 +50,14 @@ The packages need to install:
 - CMOMO_task3.py: optimization Task3. 
 - CMOMO_task4.py: optimization Task4. 
 
-### Getting Started
-For Task 1, please run python CMOMO_task1.py
-For Task 2, please run python CMOMO_task2.py
-For Task 3, please run python CMOMO_task3.py
-For Task 4, please run python CMOMO_task3.py
-
-The output results of molecules are summarized in smi_pro_tuple, and further save in .csv file.
+### Optimization
+```
+python CMOMO_task1.py
+python CMOMO_task2.py
+python CMOMO_task3.py
+python CMOMO_task4.py
+```
+The output results, i.e., optimized molecules, are summarized in TSCMO_task1_endsmiles, and further save in .csv file.
 
 
 
