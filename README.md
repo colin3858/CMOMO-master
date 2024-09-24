@@ -1,29 +1,33 @@
 # coinstrained multi-objective molecule optimization (CMOMO)
 
-Implementation of the method proposed in the paper "A pareto-based deep evolutionary algorithm for constrained 
-multi-property molecular optimization" by Xin Xia, Yajie Zhang, Xiangxiang Zeng, Xingyi Zhang, Chunhou Zheng, Yansen Su.<sup>1</sup>
+Implementation of the method proposed in the paper "Balancing property optimization and constraint
+satisfaction for constrained multi-property molecular
+optimization" by Xin Xia, Yajie Zhang, Xiangxiang Zeng, Xingyi Zhang, Chunhou Zheng, Yansen Su.<sup>1</sup>
 
 ### Dependencies
 - [cddd](https://github.com/jrwnter/cddd)
-Download the pre-trained CDDD model using the bash script:
+Notice: You need download the pre-trained encoder-decoder CDDD model to mapping molecules between SMILES and continuous vectors. It can be load by the bash script:
 ```
 ./download_default_model.sh
+
+### Installing
+The packages need to install: 
 - python=3.6
   - rdkit
   - pytorch=1.4.0
   - cudatoolkit=10.0
   - tensorboardX
+  - PyTDC
+  - Guacamol
   - pip>=19.1,<20.3
   - pip:
     - molsets
     - cddd
 ```
+### The installed environment can be downloaded from the cloud drive
+-cmomo-env()
 
-### Installing
-```
-cd CMOMO
-pip install .
-```
+
 ### Getting Started
 For Task 1, please run python CMOMO_task1.py
 For Task 2, please run python CMOMO_task2.py
