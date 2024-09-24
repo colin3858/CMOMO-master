@@ -6,7 +6,7 @@ optimization" by Xin Xia, Yajie Zhang, Xiangxiang Zeng, Xingyi Zhang, Chunhou Zh
 
 ### Dependencies
 - [cddd](https://github.com/jrwnter/cddd)
-Notice: You need download the pre-trained encoder-decoder CDDD model to mapping molecules between SMILES and continuous vectors. It can be load by the bash script:
+  - Notice: You need download the pre-trained encoder-decoder CDDD model to mapping molecules between SMILES and continuous vectors. It can be load by the bash script:
 ```
 ./download_default_model.sh
 ```
