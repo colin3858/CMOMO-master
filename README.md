@@ -9,7 +9,7 @@ optimization" by Xin Xia, Yajie Zhang, Xiangxiang Zeng, Xingyi Zhang, Chunhou Zh
 Notice: You need download the pre-trained encoder-decoder CDDD model to mapping molecules between SMILES and continuous vectors. It can be load by the bash script:
 ```
 ./download_default_model.sh
-
+```
 ### Installing
 The packages need to install: 
 - python=3.6
@@ -23,10 +23,13 @@ The packages need to install:
   - pip:
     - molsets
     - cddd
-```
-### The installed environment can be downloaded from the cloud drive
+The installed environment can be downloaded from the cloud drive
 -cmomo-env()
 
+### File Description
+data/: The used test dataset and bank library in this paper.
+sub_code/NSGA2.py:
+CMOMO_task1.py: The 
 
 ### Getting Started
 For Task 1, please run python CMOMO_task1.py
