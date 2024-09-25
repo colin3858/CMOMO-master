@@ -10,6 +10,8 @@ optimization" by Xin Xia, Yajie Zhang, Xiangxiang Zeng, Xingyi Zhang, Chunhou Zh
 ```
 ./download_default_model.sh
 ```
+The link is also provided on [cddd](https://drive.google.com/file/d/1ccJEclD1dxTNTUswUvIVygqRQSawUCnJ/view?usp=sharing). 
+
 ### Installing
 The packages need to install: 
 - python=3.6
@@ -24,7 +26,7 @@ The packages need to install:
     - molsets
     - cddd
 - The installed environment can be downloaded from the cloud drive
-  - qmocddd()
+  - [qmocddd](https://drive.google.com/file/d/1Wad0hxEfoqC5VzWGDPk9eBsFVkCi2o6Y/view?usp=drive_link)
 
 ### Data Description
 - data/qedplogp_test: dataset on Task1.
