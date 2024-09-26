@@ -50,7 +50,9 @@ The packages need to install:
 - CMOMO_task1.py: optimization Task1. 
 - CMOMO_task2.py: optimization Task2. 
 - CMOMO_task3.py: optimization Task3. 
-- CMOMO_task4.py: optimization Task4. 
+- CMOMO_task4.py: optimization Task4.
+
+- Results/: final optimized molecules on four tasks obtained by CMOMO.
 
 ### Optimization
 ```
